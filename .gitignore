@@ -1,4 +1,15 @@
 target/
-resources/
+resources/public/js
+resources/main.js
 *-init.clj
 figwheel_server.log
+
+# Android/IntelliJ
+#
+build/
+.idea/
+!.idea/runConfigurations
+.gradle
+local.properties
+*.iml
+.nrepl-port
