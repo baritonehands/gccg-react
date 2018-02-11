@@ -2,7 +2,8 @@ target/
 classes/
 *-init.clj
 figwheel_server.log
-electron_app/js
+electron_app/gen
+electron_app/graphics
 
 # Android/IntelliJ
 #
