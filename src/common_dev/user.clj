@@ -18,7 +18,7 @@
   (ra/start-figwheel!
     {:build-ids  build-ids
      :all-builds cljs-builds
-     :figwheel-options {:css-dirs ["resources/public/css"]}})
+     :figwheel-options {:css-dirs ["electron_app/css"]}})
   (ra/cljs-repl))
 
 (defn stop-figwheel

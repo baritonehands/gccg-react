@@ -5,7 +5,8 @@
   :description "A cross-platform client for GCCG"
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.clojure/clojurescript "1.9.946"]
-                 [re-frame "0.9.2"]]
+                 [re-frame "0.9.2"]
+                 [funcool/tubax "0.2.0"]]
   :plugins [[lein-cljsbuild "1.1.5"]
             [lein-figwheel "0.5.14"]
             [lein-doo "0.1.8"]]
@@ -18,29 +19,27 @@
                          ["do" "clean"
                           ["doo" "node" "test" "once"]]}
 
-  :clean-targets ^{:protect false} ["resources/main.js"
-                                    "resources/public/js/desktop-core.js"
-                                    "resources/public/js/desktop-core.js.map"
-                                    "resources/public/js/desktop-out"]
+  :clean-targets ^{:protect false} ["target"
+                                    "electron_app/gen"]
 
   :profiles {:dev  {:dependencies [[figwheel-sidecar "0.5.14"]
                                    [com.cemerick/piggieback "0.2.1"]]
                     :source-paths ["src/common_dev"]
-                    :figwheel     {:css-dirs ["resources/public/css"]}
+                    :figwheel     {:css-dirs ["electron_app/css"]}
                     :cljsbuild    {:builds [{:source-paths ["src/electron"]
                                              :id           "electron-dev"
-                                             :compiler     {:output-to      "resources/main.js"
-                                                            :output-dir     "resources/public/js/electron-dev"
+                                             :compiler     {:output-to      "electron_app/gen/js/main.js"
+                                                            :output-dir     "electron_app/gen/js/electron-dev"
                                                             :optimizations  :simple
                                                             :pretty-print   true
                                                             :cache-analysis true}}
                                             {:source-paths ["src/desktop_dev" "src/desktop" "src/common"]
                                              :id           "desktop-dev"
                                              :figwheel     true
-                                             :compiler     {:output-to      "resources/public/js/desktop-core.js"
-                                                            :output-dir     "resources/public/js/desktop-out"
+                                             :compiler     {:output-to      "electron_app/gen/js/desktop-core.js"
+                                                            :output-dir     "electron_app/gen/js/desktop-dev"
                                                             :source-map     true
-                                                            :asset-path     "js/desktop-out"
+                                                            :asset-path     "gen/js/desktop-dev"
                                                             :optimizations  :none
                                                             :cache-analysis true
                                                             :main           dev.core}}
@@ -52,21 +51,24 @@
                                                             :source-map    true
                                                             :optimizations :none
                                                             :target        :nodejs
-                                                            :main          gccg.test.core}}]}
+                                                            :main          gccg.test.core}}]
+                                   ;:foreign-libs [{:file "sax/lib/sax.js"
+                                   ;                :provides ["ext.saxjs"]}]
+                                   }
                     :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}}
              :prod {:cljsbuild {:builds [{:source-paths ["src/electron"]
                                           :id           "electron-release"
-                                          :compiler     {:output-to      "resources/main.js"
-                                                         :output-dir     "resources/public/js/electron-release"
+                                          :compiler     {:output-to      "electron_app/gen/js/main.js"
+                                                         :output-dir     "electron_app/gen/js/electron-release"
                                                          :optimizations  :advanced
                                                          :pretty-print   true
                                                          :cache-analysis true
                                                          :infer-externs  true}}
                                          {:source-paths ["src/desktop" "src/common"]
                                           :id           "desktop-release"
-                                          :compiler     {:output-to      "resources/public/js/desktop-core.js"
-                                                         :output-dir     "resources/public/js/desktop-release-out"
-                                                         :source-map     "resources/public/js/desktop-core.js.map"
+                                          :compiler     {:output-to      "electron_app/gen/js/desktop-core.js"
+                                                         :output-dir     "electron_app/gen/js/desktop-release"
+                                                         :source-map     "electron_app/gen/js/desktop-core.js.map"
                                                          :optimizations  :advanced
                                                          :cache-analysis true
                                                          :infer-externs  true

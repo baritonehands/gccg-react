@@ -1,8 +1,8 @@
 target/
-resources/public/js
-resources/main.js
+classes/
 *-init.clj
 figwheel_server.log
+electron_app/js
 
 # Android/IntelliJ
 #

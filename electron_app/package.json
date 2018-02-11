@@ -1,5 +1,5 @@
 {
   "name": "GCCG",
   "version": "0.1.0",
-  "main": "resources/main.js"
+  "main": "gen/js/main.js"
 }

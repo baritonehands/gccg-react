@@ -15,13 +15,13 @@
   (reset! win-atom (browser-window.
                         (clj->js size)))
   ; Path is relative to the compiled js file (main.js in our case)
-  (.loadURL ^js/electron.BrowserWindow @win-atom (str "file://" js/__dirname "/public/" name ".html"))
+  (.loadURL ^js/electron.BrowserWindow @win-atom (str "file://" js/__dirname "/../../" name ".html"))
   (.on ^js/electron.BrowserWindow @win-atom "closed" #(reset! win-atom nil)))
 
 (defn init-browser []
 
-  (init-window main-window "index" {:width  1280
-                                     :height 800})
+  (init-window main-window "index" {:width  800
+                                    :height 600})
 
   (.setApplicationMenu
     menu
