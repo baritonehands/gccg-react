@@ -10,7 +10,7 @@
            res []
            last 0]
       (let [idx (s/index-of s tk last)
-            next-res (conj res (.substring s last idx) (token-fn v))]
+            next-res (conj res (.substring s last idx) (token-fn [tk v]))]
         (if rem
           (recur (first rem) (next rem) next-res (+ idx (count tk)))
           (->> (conj next-res (.substring s (+ idx (count tk))))

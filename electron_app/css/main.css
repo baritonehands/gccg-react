@@ -43,10 +43,6 @@ html, body, #app-container {
 
 .card {
     position: relative;
-}
-
-.card > * {
-    vertical-align: top;
     line-height: 20px;
 }
 
@@ -65,7 +61,7 @@ html, body, #app-container {
     font-weight: bold;
 }
 
-.text * {
+.text > * {
     vertical-align: middle;
 }
 

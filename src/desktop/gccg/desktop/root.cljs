@@ -6,18 +6,18 @@
 (defn root []
   (let [game @(subscribe [:game])]
     [:div.root
-     [:div {:style {"width" "50%"}}
-      [:div "Hello, " (-> game :meta :name) "!"]
+     [:div {:style {"width" "30%"}}
       (into [list-view {:item-click #(dispatch [:game/select-set %])}]
-            (for [{:keys [source]} (-> game :meta :cardset)]
+            (for [{:keys [source]} (->> game :meta :cardset (sort-by :source))]
               source))]
-     [:div {:style {"width" "50%"}} ;(-> game :selected-set str)
+     [:div {:style {"width" "70%"}}                         ;(-> game :selected-set str)
       (if-let [cardset (-> game :selected-set)]
         (into [list-view {
                           ;:item-click #(dispatch [:canvas/add-child (get-item %)])
                           }]
-              (for [card (-> cardset :cards first :card)]
-                [card-details {:key  (:name card)
-                               :dir  (str (-> game :meta :dir) "/" (-> cardset :dir))
-                               :card card}])
+              (for [card (->> cardset :cards first :card (sort-by :name))]
+                [card-details {:key     (:name card)
+                               :game    (-> game :meta)
+                               :cardset cardset
+                               :card    card}])
               ))]]))

@@ -5,6 +5,7 @@
   :description "A cross-platform client for GCCG"
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.clojure/clojurescript "1.9.946"]
+                 [org.clojure/data.xml "0.2.0-alpha5"]
                  [re-frame "0.9.2"]
                  [funcool/tubax "0.2.0"]]
   :plugins [[lein-cljsbuild "1.1.5"]

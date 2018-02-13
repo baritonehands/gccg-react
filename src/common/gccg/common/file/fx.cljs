@@ -1,6 +1,6 @@
 (ns gccg.common.file.fx
   (:require [re-frame.core :refer [dispatch reg-fx]]
-            [tubax.core :refer [xml->clj]]
+            [clojure.data.xml :refer [parse-str]]
             [gccg.common.file.wrapper :as file]
             [gccg.common.xml :as xml]))
 
@@ -21,10 +21,10 @@
                (fn [err data]
                  (if err
                    (dispatch (conj error-event err))
-                   (let [sdata (str data)]
+                   (let [sdata (.toString data)]
                      (dispatch
                        (conj success-event
                              (condp = type
-                               :xml (-> (xml->clj sdata)
+                               :xml (-> (parse-str sdata)
                                         (xml/entity->map))
                                sdata)))))))))
