@@ -44,6 +44,20 @@
                                                             :optimizations  :none
                                                             :cache-analysis true
                                                             :main           dev.core}}
+                                            {:id           "ios"
+                                             :source-paths ["src/mobile" "src/mobile_dev" "src/common"]
+                                             :figwheel     true
+                                             :compiler     {:output-to     "target/ios/not-used.js"
+                                                            :main          "env.ios.main"
+                                                            :output-dir    "target/ios"
+                                                            :optimizations :none}}
+                                            {:id           "android"
+                                             :source-paths ["src/mobile" "src/mobile_dev" "src/common"]
+                                             :figwheel     true
+                                             :compiler     {:output-to     "target/android/not-used.js"
+                                                            :main          "env.android.main"
+                                                            :output-dir    "target/android"
+                                                            :optimizations :none}}
                                             {:source-paths ["test" "src/desktop" "src/common"]
                                              :id           "test"
                                              :figwheel     true
@@ -52,10 +66,7 @@
                                                             :source-map    true
                                                             :optimizations :none
                                                             :target        :nodejs
-                                                            :main          gccg.test.core}}]
-                                   ;:foreign-libs [{:file "sax/lib/sax.js"
-                                   ;                :provides ["ext.saxjs"]}]
-                                   }
+                                                            :main          gccg.test.core}}]}
                     :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}}
              :prod {:cljsbuild {:builds [{:source-paths ["src/electron"]
                                           :id           "electron-release"
@@ -73,4 +84,22 @@
                                                          :optimizations  :advanced
                                                          :cache-analysis true
                                                          :infer-externs  true
-                                                         :main           gccg.desktop.core}}]}}})
+                                                         :main           gccg.desktop.core}}
+                                         {:id           "ios"
+                                          :source-paths ["src" "env/prod"]
+                                          :compiler     {:output-to     "index.ios.js"
+                                                         :main          "env.ios.main"
+                                                         :output-dir    "target/ios"
+                                                         :static-fns    true
+                                                         :optimize-constants true
+                                                         :optimizations :simple
+                                                         :closure-defines {"goog.DEBUG" false}}}
+                                         {:id           "android"
+                                          :source-paths ["src" "env/prod"]
+                                          :compiler     {:output-to     "index.android.js"
+                                                         :main          "env.android.main"
+                                                         :output-dir    "target/android"
+                                                         :static-fns    true
+                                                         :optimize-constants true
+                                                         :optimizations :simple
+                                                         :closure-defines {"goog.DEBUG" false}}}]}}})

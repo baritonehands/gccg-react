@@ -1,0 +1,23 @@
+{
+  "name": "GCCG",
+  "interface": "reagent6",
+  "envRoots": {
+    "dev": "src/mobile_dev",
+    "prod": "src/mobile_prod"
+  },
+  "modules": [],
+  "imageDirs": [
+    "mobile_images"
+  ],
+  "platforms": {
+    "ios": {
+      "host": "localhost",
+      "modules": []
+    },
+    "android": {
+      "host": "localhost",
+      "modules": []
+    }
+  },
+  "autoRequire": false
+}
