@@ -6,7 +6,8 @@
   (let [img-map (reduce #(assoc %1 (:tag %2) (:file %2)) {} images)]
     (fn [[tag v]]
       (if-let [file (img-map tag)]
-        [:img.token {:src (str "graphics/Mtg/" (s/replace-all file #"/" ""))}]
+        [:img.token {:src (str "graphics/Mtg/" (s/replace-all file #"/" ""))
+                     :alt v}]
         [:span ""]))))
 
 (defn get-attr [attrs key]

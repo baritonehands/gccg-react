@@ -21,7 +21,7 @@
                (fn [err data]
                  (if err
                    (dispatch (conj error-event err))
-                   (let [sdata (.toString data)]
+                   (let [sdata (.toString data "latin1")]
                      (dispatch
                        (conj success-event
                              (condp = type
