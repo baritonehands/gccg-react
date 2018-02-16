@@ -1,2 +1,2 @@
-(ns gccg.desktop.subs
+(ns gccg.common.subs
   (:require [gccg.common.game.subs]))

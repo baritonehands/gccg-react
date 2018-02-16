@@ -1,5 +1,5 @@
 (ns cljs.user
-  (:require [gccg.common.file.wrapper :as file]
+  (:require [gccg.platform.file.wrapper :as file]
             [gccg.common.xml :as xml]
             [tubax.core :refer [xml->clj]]
             [clojure.data.xml :refer [parse-str]]
@@ -30,7 +30,7 @@
   ([name] (load-xml parse-str name))
   ([xml-fn name]
    (let [res (atom nil)
-         filename (str "../gccg-svn/core/xml/" name)
+         filename (str "xml/" name)
          start (system-time)]
      ;(println "Opening" filename)
      (file/read filename

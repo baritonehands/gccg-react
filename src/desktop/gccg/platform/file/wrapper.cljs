@@ -1,4 +1,4 @@
-(ns gccg.common.file.wrapper)
+(ns gccg.platform.file.wrapper)
 
 (def fs (js/require "fs"))
 

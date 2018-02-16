@@ -1,7 +1,7 @@
 (ns gccg.common.file.fx
   (:require [re-frame.core :refer [dispatch reg-fx]]
-            [clojure.data.xml :refer [parse-str]]
-            [gccg.common.file.wrapper :as file]
+            [gccg.platform.xml.wrapper :refer [parse-xml]]
+            [gccg.platform.file.wrapper :as file]
             [gccg.common.xml :as xml]))
 
 (reg-fx
@@ -25,6 +25,6 @@
                      (dispatch
                        (conj success-event
                              (condp = type
-                               :xml (-> (parse-str sdata)
+                               :xml (-> (parse-xml sdata)
                                         (xml/entity->map))
                                sdata)))))))))

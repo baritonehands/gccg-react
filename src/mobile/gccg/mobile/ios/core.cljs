@@ -1,8 +1,8 @@
 (ns gccg.mobile.ios.core
   (:require [reagent.core :as r :refer [atom]]
             [re-frame.core :refer [subscribe dispatch dispatch-sync]]
-            [gccg.mobile.events]
-            [gccg.mobile.subs]))
+            [gccg.common.events]
+            [gccg.common.subs]))
 
 (def ReactNative (js/require "react-native"))
 
@@ -18,10 +18,10 @@
       (.alert (.-Alert ReactNative) title))
 
 (defn app-root []
-  (let [greeting (subscribe [:get-greeting])]
+  (let [game (subscribe [:game])]
     (fn []
       [view {:style {:flex-direction "column" :margin 40 :align-items "center"}}
-       [text {:style {:font-size 30 :font-weight "100" :margin-bottom 20 :text-align "center"}} @greeting]
+       [text {:style {:font-size 30 :font-weight "100" :margin-bottom 20 :text-align "center"}} (-> @game :name)]
        [image {:source logo-img
                :style  {:width 80 :height 80 :margin-bottom 30}}]
        [touchable-highlight {:style {:background-color "#999" :padding 10 :border-radius 5}
@@ -29,5 +29,5 @@
         [text {:style {:color "white" :text-align "center" :font-weight "bold"}} "press me"]]])))
 
 (defn init []
-      (dispatch-sync [:initialize-db])
+      (dispatch-sync [:initialize])
       (.registerComponent app-registry "GCCG" #(r/reactify-component app-root)))

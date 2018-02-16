@@ -2,8 +2,8 @@
   (:require [reagent.core :as reagent :refer [atom]]
             [re-frame.core :refer [subscribe dispatch-sync]]
             [gccg.desktop.root :refer [root]]
-            [gccg.desktop.subs]
-            [gccg.desktop.events]))
+            [gccg.common.subs]
+            [gccg.common.events]))
 
 (defonce reload-cnt (atom 0))
 

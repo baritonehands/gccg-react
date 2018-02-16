@@ -1,8 +1,8 @@
 (ns gccg.mobile.android.core
   (:require [reagent.core :as r :refer [atom]]
             [re-frame.core :refer [subscribe dispatch dispatch-sync]]
-            [gccg.mobile.events]
-            [gccg.mobile.subs]))
+            [gccg.common.events]
+            [gccg.common.subs]))
 
 (def ReactNative (js/require "react-native"))
 

@@ -5,7 +5,7 @@
     "dev": "src/mobile_dev",
     "prod": "src/mobile_prod"
   },
-  "modules": [],
+  "modules": ["react-native-fs"],
   "imageDirs": [
     "mobile_images"
   ],

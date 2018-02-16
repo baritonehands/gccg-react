@@ -4,6 +4,7 @@ classes/
 figwheel_server.log
 electron_app/gen
 electron_app/graphics
+electron_app/xml
 
 # Android/IntelliJ
 #

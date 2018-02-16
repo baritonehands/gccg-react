@@ -1,13 +1,14 @@
 (defproject gccg "0.1.0-SNAPSHOT"
   :license {:name "The MIT License"
             :url "https://opensource.org/licenses/MIT"}
-  :source-paths ["src/clj"]
+  :source-paths ["src/clj" "src/cljc"]
   :description "A cross-platform client for GCCG"
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.clojure/clojurescript "1.9.946"]
                  [org.clojure/data.xml "0.2.0-alpha5"]
                  [re-frame "0.9.2"]
-                 [funcool/tubax "0.2.0"]]
+                 [funcool/tubax "0.2.0"]
+                 [me.raynes/fs "1.4.6"]]
   :plugins [[lein-cljsbuild "1.1.5"]
             [lein-figwheel "0.5.14"]
             [lein-doo "0.1.8"]]

@@ -1,3 +1,3 @@
-(ns gccg.desktop.db)
+(ns gccg.common.db)
 
 (def app-db {:game nil})
