@@ -9,13 +9,11 @@
       [:div.root
        [:div {:style {"width" "30%"}}
         (into [list-view {:item-click #(dispatch [:game/select-set %])}]
-              (for [{:keys [source]} (->> @game :meta :cardset (sort-by :source))]
+              (for [{:keys [source]} (->> @game :meta :cardset)]
                 source))]
        [:div {:style {"width" "70%"}}                       ;(-> game :selected-set str)
         (if-let [cardset (-> @game :selected-set)]
-          (into [list-view {
-                            ;:item-click #(dispatch [:canvas/add-child (get-item %)])
-                            }]
+          (into [list-view {}]
                 (for [card (->> cardset :cards first :card (sort-by :name))]
                   [card-details {:key     (:name card)
                                  :game    (-> @game :meta)
