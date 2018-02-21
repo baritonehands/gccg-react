@@ -1,6 +1,7 @@
 (ns gccg.mobile.ios.core
   (:require [reagent.core :as r :refer [atom]]
             [re-frame.core :refer [subscribe dispatch dispatch-sync]]
+            [gccg.mobile.game :refer [game]]
             [gccg.common.events]
             [gccg.common.subs]))
 
@@ -10,24 +11,18 @@
 (def text (r/adapt-react-class (.-Text ReactNative)))
 (def view (r/adapt-react-class (.-View ReactNative)))
 (def image (r/adapt-react-class (.-Image ReactNative)))
+(def flat-list (r/adapt-react-class (.-FlatList ReactNative)))
 (def touchable-highlight (r/adapt-react-class (.-TouchableHighlight ReactNative)))
-
-(def logo-img (js/require "./mobile_images/cljs.png"))
-
-(defn alert [title]
-      (.alert (.-Alert ReactNative) title))
+(def navigator-ios (r/adapt-react-class (.-NavigatorIOS ReactNative)))
 
 (defn app-root []
-  (let [game (subscribe [:game])]
+  (let [nav (r/atom nil)]
     (fn []
-      [view {:style {:flex-direction "column" :margin 40 :align-items "center"}}
-       [text {:style {:font-size 30 :font-weight "100" :margin-bottom 20 :text-align "center"}} (-> @game :name)]
-       [image {:source logo-img
-               :style  {:width 80 :height 80 :margin-bottom 30}}]
-       [touchable-highlight {:style {:background-color "#999" :padding 10 :border-radius 5}
-                             :on-press #(alert "React Native!")}
-        [text {:style {:color "white" :text-align "center" :font-weight "bold"}} "press me"]]])))
+      [navigator-ios {:ref           (partial reset! nav)
+                      :initial-route #js {:component (r/reactify-component game)
+                                          :title     "GCCG"}
+                      :style {:flex 1}}])))
 
 (defn init []
-      (dispatch-sync [:initialize])
-      (.registerComponent app-registry "GCCG" #(r/reactify-component app-root)))
+  (dispatch-sync [:initialize])
+  (.registerComponent app-registry "GCCG" #(r/reactify-component app-root)))

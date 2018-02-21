@@ -6,7 +6,7 @@
   :game/initialize
   (fn [cofx [_ name]]
     {:db           (assoc-in cofx [:db :game] init-db)
-     :file.fx/open {:filename      (str "../gccg-svn/core/xml/" name ".xml")
+     :file.fx/open {:filename      (str "xml/" name ".xml")
                     :type          :xml
                     :success-event [:game/init-success]
                     :error-event   [:game/init-error]}}))
@@ -26,7 +26,7 @@
   (fn [cofx [_ idx]]
     (let [{:keys [dir cardset]} (get-in (:db cofx) [:game :meta])
           {:keys [source]} (get cardset idx)]
-      {:file.fx/open {:filename      (str "../gccg-svn/core/xml/" dir "/" source)
+      {:file.fx/open {:filename      (str "xml/" dir "/" source)
                       :type          :xml
                       :success-event [:game/select-set-success]
                       :error-event   [:game/select-set-error]}})))

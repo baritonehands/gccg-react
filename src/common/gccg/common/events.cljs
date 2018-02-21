@@ -8,4 +8,4 @@
   :initialize
   (fn [_ [_ name]]
     {:db app-db
-     :dispatch-n [[:game/initialize "poker"]]}))
+     :dispatch-n [[:game/initialize "mtg"]]}))

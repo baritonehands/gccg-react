@@ -38,10 +38,8 @@
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
-		EB767694203690B900FA93EE /* xml in Resources */ = {isa = PBXBuildFile; fileRef = EB767693203690B900FA93EE /* xml */; };
-		EB767695203690B900FA93EE /* xml in Resources */ = {isa = PBXBuildFile; fileRef = EB767693203690B900FA93EE /* xml */; };
-		EB767696203690B900FA93EE /* xml in Resources */ = {isa = PBXBuildFile; fileRef = EB767693203690B900FA93EE /* xml */; };
-		EB767697203690B900FA93EE /* xml in Resources */ = {isa = PBXBuildFile; fileRef = EB767693203690B900FA93EE /* xml */; };
+		EB18C898203D1B93000DEDA5 /* graphics in Resources */ = {isa = PBXBuildFile; fileRef = EB18C876203D1B93000DEDA5 /* graphics */; };
+		EBC44B7D203CDA4500D95293 /* xml in Resources */ = {isa = PBXBuildFile; fileRef = EBC44B7C203CDA4500D95293 /* xml */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -320,7 +318,8 @@
 		78FAAC99E6894C5CBE6D3195 /* RNFS.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFS.xcodeproj; path = "../node_modules/react-native-fs/RNFS.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
-		EB767693203690B900FA93EE /* xml */ = {isa = PBXFileReference; lastKnownFileType = folder; name = xml; path = "../../gccg-svn/core/xml"; sourceTree = "<group>"; };
+		EB18C876203D1B93000DEDA5 /* graphics */ = {isa = PBXFileReference; lastKnownFileType = folder; name = graphics; path = "../gccg-core/graphics"; sourceTree = "<group>"; };
+		EBC44B7C203CDA4500D95293 /* xml */ = {isa = PBXFileReference; lastKnownFileType = folder; name = xml; path = "../gccg-core/xml"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -458,7 +457,8 @@
 		13B07FAE1A68108700A75B9A /* GCCG */ = {
 			isa = PBXGroup;
 			children = (
-				EB767693203690B900FA93EE /* xml */,
+				EB18C876203D1B93000DEDA5 /* graphics */,
+				EBC44B7C203CDA4500D95293 /* xml */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -1000,7 +1000,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB767695203690B900FA93EE /* xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1008,7 +1007,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB767694203690B900FA93EE /* xml in Resources */,
+				EBC44B7D203CDA4500D95293 /* xml in Resources */,
+				EB18C898203D1B93000DEDA5 /* graphics in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
@@ -1018,7 +1018,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB767696203690B900FA93EE /* xml in Resources */,
 				2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1027,7 +1026,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB767697203690B900FA93EE /* xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

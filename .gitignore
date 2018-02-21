@@ -72,3 +72,6 @@ src/mobile_dev/env/config.cljs
 # Figwheel
 #
 figwheel_server.log
+
+#GCCG
+gccg-core*
