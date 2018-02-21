@@ -3,7 +3,9 @@
             [re-frame.core :refer [subscribe dispatch dispatch-sync]]
             [gccg.mobile.game :refer [game]]
             [gccg.common.events]
-            [gccg.common.subs]))
+            [gccg.common.subs]
+            [gccg.mobile.images.events]
+            [gccg.mobile.images.subs]))
 
 (def ReactNative (js/require "react-native"))
 
@@ -24,5 +26,5 @@
                       :style {:flex 1}}])))
 
 (defn init []
-  (dispatch-sync [:initialize])
+  (dispatch-sync [:initialize {:game-init-success [:images/init-from-game]}])
   (.registerComponent app-registry "GCCG" #(r/reactify-component app-root)))

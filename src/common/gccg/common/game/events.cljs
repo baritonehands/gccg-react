@@ -4,17 +4,20 @@
 
 (reg-event-fx
   :game/initialize
-  (fn [cofx [_ name]]
+  (fn [cofx [_ {:keys [name success-event]}]]
     {:db           (assoc-in cofx [:db :game] init-db)
      :file.fx/open {:filename      (str "xml/" name ".xml")
                     :type          :xml
-                    :success-event [:game/init-success]
+                    :success-event [:game/init-success {:success-event success-event}]
                     :error-event   [:game/init-error]}}))
 
-(reg-event-db
+(reg-event-fx
   :game/init-success
-  (fn [db [_ data]]
-    (assoc-in db [:game :meta] data)))
+  (fn [cofx [_ {:keys [success-event]} data]]
+    (let [res {:db (assoc-in (:db cofx) [:game :meta] data)}]
+      (if success-event
+        (assoc res :dispatch (conj success-event data))
+        res))))
 
 (reg-event-db
   :game/init-error

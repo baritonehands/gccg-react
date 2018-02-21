@@ -16,15 +16,16 @@
 
 (reg-fx
   :file.fx/open
-  (fn [{:keys [filename type success-event error-event]}]
-    (file/read filename
-               (fn [err data]
-                 (if err
-                   (dispatch (conj error-event err))
-                   (let [sdata (.toString data "latin1")]
-                     (dispatch
-                       (conj success-event
-                             (condp = type
-                               :xml (-> (parse-xml sdata)
-                                        (xml/entity->map))
-                               sdata)))))))))
+  (fn [{:keys [filename options type success-event error-event]}]
+    (let [handler (fn [err data]
+                    (if err
+                      (dispatch (conj error-event err))
+                      (dispatch
+                        (conj success-event
+                              (condp = type
+                                :xml (-> (parse-xml data)
+                                         (xml/entity->map))
+                                data)))))]
+      (if (not (empty? options))
+        (file/read filename options handler)
+        (file/read filename handler)))))

@@ -6,6 +6,7 @@
 
 (reg-event-fx
   :initialize
-  (fn [_ [_ name]]
+  (fn [_ [_ {:keys [game-init-success]}]]
     {:db app-db
-     :dispatch-n [[:game/initialize "mtg"]]}))
+     :dispatch-n [[:game/initialize {:name "mtg"
+                                     :success-event game-init-success}]]}))
