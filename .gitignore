@@ -2,9 +2,14 @@ target/
 classes/
 *-init.clj
 figwheel_server.log
+
+#GCCG
+gccg-core*
 electron_app/gen
 electron_app/graphics
 electron_app/xml
+resources/public/graphics
+resources/xml
 
 # Android/IntelliJ
 #
@@ -73,6 +78,3 @@ android/app/src/main/assets/*
 # Figwheel
 #
 figwheel_server.log
-
-#GCCG
-gccg-core*

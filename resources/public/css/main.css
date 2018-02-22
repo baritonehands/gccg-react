@@ -1,0 +1,79 @@
+body {
+    font-family: Georgia, Times, serif;
+}
+
+html, body, #app-container {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.root {
+    display: flex;
+    height: 100%;
+    overflow: hidden;
+}
+
+.logos img {
+    width: 100px;
+    margin-left: 5px;
+}
+
+.root > div {
+    float: left;
+    height: 100%;
+    overflow: auto;
+}
+
+.list-view {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+    height: 100%;
+}
+
+.list-item {
+    padding: 5px 10px;
+    border-bottom: 1px solid #999999;
+    cursor: pointer;
+}
+
+.list-item:hover {
+    background-color: #efefef;
+}
+
+.card {
+    position: relative;
+    line-height: 20px;
+}
+
+.card > img {
+    float: left;
+    padding-right: 10px;
+    width: 200px;
+    height: 285px;
+}
+
+.card .title, .card .type {
+    margin: 0 0 10px 0;
+    padding: 0;
+}
+
+.card .stats {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.text > * {
+    vertical-align: middle;
+}
+
+.card .token {
+    padding: 0 1px;
+    vertical-align: middle;
+}
+
+.clearfix {
+    clear: both;
+}
