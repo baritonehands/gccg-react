@@ -1,7 +1,7 @@
 (defproject gccg "0.1.0-SNAPSHOT"
   :license {:name "The MIT License"
             :url "https://opensource.org/licenses/MIT"}
-  :source-paths ["src/clj" "src/cljc"]
+  :source-paths ["src/build"]
   :description "A cross-platform client for GCCG"
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.clojure/clojurescript "1.9.946"]
@@ -46,14 +46,14 @@
                                                             :cache-analysis true
                                                             :main           dev.core}}
                                             {:id           "ios"
-                                             :source-paths ["src/mobile" "src/mobile_dev" "src/common"]
+                                             :source-paths ["src/ios" "src/ios_dev" "src/mobile" "src/mobile_dev" "src/common"]
                                              :figwheel     true
                                              :compiler     {:output-to     "target/ios/not-used.js"
                                                             :main          "env.ios.main"
                                                             :output-dir    "target/ios"
                                                             :optimizations :none}}
                                             {:id           "android"
-                                             :source-paths ["src/mobile" "src/mobile_dev" "src/common"]
+                                             :source-paths ["src/android" "src/android_dev" "src/mobile" "src/mobile_dev" "src/common"]
                                              :figwheel     true
                                              :compiler     {:output-to     "target/android/not-used.js"
                                                             :main          "env.android.main"

@@ -18,12 +18,16 @@
                          (r/as-element
                            [touchable-highlight {:on-press (fn []
                                                              (dispatch [:game/select-set (.-index data)])
-                                                             (-> props :navigator (.push #js {:component (r/reactify-component cardset)})))}
-                            [view
+                                                             ((:on-item-selected props)))
+                                                 :underlay-color "#CCCCCC"}
+                            [view {:style {:padding 10
+                                           :border-bottom-color "#333333"
+                                           :border-bottom-width 1}}
                              [text {:key (.-index data)} (-> data .-item .-source)]]]))]
     (fn [props]
       (println "Game props" props)
-      [view {:style {:flex-direction "column" :margin-top 80 :margin-horizontal 10 :align-items "center"}}
+      [view {:style {:flex-direction "column"
+                     :align-items "center"}}
        [flat-list {:data        (->> @game :meta :cardset clj->js)
                    :render-item render-cardset
                    :style {:width "100%"}}]])))

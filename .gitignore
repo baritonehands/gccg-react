@@ -68,6 +68,7 @@ index.ios.js
 index.android.js
 .re-natal.local
 src/mobile_dev/env/config.cljs
+android/app/src/main/assets/*
 
 # Figwheel
 #

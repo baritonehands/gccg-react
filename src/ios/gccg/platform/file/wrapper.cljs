@@ -1,5 +1,4 @@
-(ns gccg.platform.file.wrapper
-  (:require-macros [gccg.assets :as assets]))
+(ns gccg.platform.file.wrapper)
 
 (def rn-fs (js/require "react-native-fs"))
 
@@ -9,7 +8,6 @@
   ([filename {:keys [encoding]} cb]
    (-> (.readFile rn-fs (str (.-MainBundlePath rn-fs) "/" filename) encoding)
        (.then (fn [res]
-                (println "Fetched" filename (js->clj res))
                 (cb nil res)))
        (.catch (fn [err]
                  (println "Error fetching" filename (js->clj err))

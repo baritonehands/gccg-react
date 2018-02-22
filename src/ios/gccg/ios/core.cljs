@@ -1,7 +1,8 @@
-(ns gccg.mobile.ios.core
+(ns gccg.ios.core
   (:require [reagent.core :as r :refer [atom]]
             [re-frame.core :refer [subscribe dispatch dispatch-sync]]
             [gccg.mobile.game :refer [game]]
+            [gccg.mobile.cardset :refer [cardset]]
             [gccg.common.events]
             [gccg.common.subs]
             [gccg.mobile.images.events]
@@ -10,18 +11,17 @@
 (def ReactNative (js/require "react-native"))
 
 (def app-registry (.-AppRegistry ReactNative))
-(def text (r/adapt-react-class (.-Text ReactNative)))
-(def view (r/adapt-react-class (.-View ReactNative)))
-(def image (r/adapt-react-class (.-Image ReactNative)))
-(def flat-list (r/adapt-react-class (.-FlatList ReactNative)))
-(def touchable-highlight (r/adapt-react-class (.-TouchableHighlight ReactNative)))
 (def navigator-ios (r/adapt-react-class (.-NavigatorIOS ReactNative)))
+
+
+(defn game-wrapper [{:keys [navigator]}]
+  [game {:on-item-selected #(.push navigator #js {:component (r/reactify-component cardset)})}])
 
 (defn app-root []
   (let [nav (r/atom nil)]
     (fn []
       [navigator-ios {:ref           (partial reset! nav)
-                      :initial-route #js {:component (r/reactify-component game)
+                      :initial-route #js {:component (r/reactify-component game-wrapper)
                                           :title     "GCCG"}
                       :style {:flex 1}}])))
 

@@ -12,6 +12,7 @@
 (reg-event-fx
   :images/add-to-cache
   (fn [cofx [_ file]]
+    (println "Adding to cache" file)
     {:file.fx/open {:filename      file
                     :type          :image
                     :options       {:encoding "base64"}
@@ -25,7 +26,12 @@
 (reg-event-db
   :images/add-to-cache-success
   (fn [db [_ file data]]
-    (println "Loaded file" file)
     (let [ext-idx (s/last-index-of file ".")]
       (assoc-in db [:images file]
                 (str "data:" (ext->mime-type (.substring file ext-idx)) ";base64," data)))))
+
+(reg-event-db
+  :images/remove-from-cache
+  (fn [db [_ file]]
+    (println "Removing from cache" file)
+    (update db :images dissoc file)))
