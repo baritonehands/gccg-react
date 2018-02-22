@@ -21,11 +21,16 @@
 (defn app-root []
   (let [nav (r/atom nil)
         page (r/atom 0)
+        update-page (fn [n]
+                      (let [new-page (swap! page + n)]
+                        (println "Updating page" new-page)
+                        (if (>= new-page 0)
+                          (.setPage @nav new-page)
+                          (.exitApp back-handler))
+                        true))
         handler (fn []
                   (println (js-keys @nav))
-                  (if (pos? @page)
-                    (.setPage @nav (dec @page))
-                    (.exitApp back-handler)))]
+                  (update-page -1))]
     (r/create-class
       {:component-did-mount    #(.addEventListener back-handler "hardwareBackPress" handler)
        :component-will-unmount #(.removeEventListener back-handler "hardwareBackPress" handler)
@@ -35,9 +40,7 @@
                                                       :on-page-selected (fn [e]
                                                                           (reset! page (-> e .-nativeEvent .-position)))
                                                       :style        {:flex 1}}
-                                  [view [game {:on-item-selected (fn []
-                                                                   (swap! page inc)
-                                                                   (.setPage @nav @page))}]]
+                                  [view [game {:on-item-selected #(update-page 1)}]]
                                   [view [cardset {}]]])})))
 
 (defn init []
