@@ -1,5 +1,4 @@
 (ns gccg.backend.server
-(ns gccg.backend.server
   (:require [gccg.backend.handler :refer [app]]
             ;[config.core :refer [env]]
             [ring.adapter.jetty :refer [run-jetty]])
@@ -10,7 +9,7 @@
 (defn init-logger! []
   (let [logger (-> (LoggerFactory/getILoggerFactory)
                    (.getLogger "ROOT"))]
-    (.setLevel logger (Level/valueOf "INFO"))))
+    (.setLevel logger Level/INFO)))
 
 (defn -main [& args]
   (init-logger!)

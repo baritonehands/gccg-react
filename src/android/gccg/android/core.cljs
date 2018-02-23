@@ -15,9 +15,6 @@
 (def view (r/adapt-react-class (.-View ReactNative)))
 (def view-pager-android (r/adapt-react-class (.-ViewPagerAndroid ReactNative)))
 
-(defn js-keys [obj]
-  (-> js/Object (.keys obj)))
-
 (defn app-root []
   (let [nav (r/atom nil)
         page (r/atom 0)

@@ -53,19 +53,8 @@
                                          (response/content-type "text/plain")
                                          constantly)]]
                             (concat
-                              gccg.backend.api.games/routes))]]])
-
-;(defroutes routes
-;           (GET "/" [] spa-page)
-;           (context "/api" []
-;             directory.api.upload/routes
-;             directory.api.query/routes
-;             directory.api.employees/routes
-;             directory.api.images/routes
-;             directory.api.version/routes)
-;
-;           (resources "/")
-;           (not-found "Not Found"))
+                              gccg.backend.api.games/routes))]
+              [true (response/not-found "Not Found")]]])
 
 (def app
   (wrap-middleware (make-handler routes)))
