@@ -49,12 +49,10 @@
              [["" (-> (response/response spa-page)
                       (response/content-type "text/html")
                       constantly)]
-              ["api/" (into [["ping" (-> (response/response "Hello, World!")
-                                         (response/content-type "text/plain")
-                                         constantly)]]
-                            (concat
-                              gccg.backend.api.games/routes))]
-              [true (response/not-found "Not Found")]]])
+              ["api/" (reduce conj
+                              gccg.backend.api.games/routes
+                              [[["ping"] identity]])]
+              [true #(response/not-found "Not Found")]]])
 
 (def app
   (wrap-middleware (make-handler routes)))

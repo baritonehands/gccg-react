@@ -8,8 +8,8 @@
 
 (defn wrap-middleware [handler]
   (-> handler
-      (wrap-resource "public")
       wrap-with-logger
+      (wrap-resource "public")
       wrap-params
       wrap-exceptions
       wrap-reload
