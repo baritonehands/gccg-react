@@ -60,8 +60,9 @@
                                       [com.cemerick/piggieback "0.2.1"]]
                        :source-paths ["src/common_dev"]
                        ;:prep-tasks   ["compile" ["cljsbuild" "once" "web"]]
-                       :figwheel       {:css-dirs     ["electron_app/css" "resources/public/css"]
-                                        :ring-handler gccg.backend.handler/app}
+                       :figwheel     {:css-dirs        ["electron_app/css" "resources/public/css"]
+                                      :ring-handler    gccg.backend.handler/app
+                                      :load-all-builds false}
                        :cljsbuild    {:builds [{:source-paths ["src/electron_main"]
                                                 :id           "electron-main"
                                                 :compiler     {:output-to      "electron_app/gen/js/main.js"
@@ -79,7 +80,7 @@
                                                                :optimizations  :none
                                                                :cache-analysis true
                                                                :main           dev.core}}
-                                               {:source-paths ["src/web" "src/desktop_dev" "src/desktop"]
+                                               {:source-paths ["src/web" "src/desktop_dev" "src/desktop" "src/common"]
                                                 :id           "web"
                                                 :figwheel     true
                                                 :compiler     {:asset-path     "/js/out"
@@ -114,7 +115,7 @@
                                                ;                :main          gccg.test.core}}
                                                ]}
                        :repl-options {:nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]
-                                      :init-ns user}}
+                                      :init-ns          user}}
              :prod    {:dependencies [[react-native-externs "0.1.0"]]
                        :cljsbuild    {:builds [{:source-paths ["src/electron_main"]
                                                 :id           "electron-main"

@@ -1,7 +1,7 @@
 (ns gccg.backend.handler
   (:require [hiccup.page :refer [include-js include-css html5]]
             [gccg.backend.middleware :refer [wrap-middleware]]
-            [bidi.ring :refer [make-handler]]
+            [bidi.ring :refer [make-handler resources]]
             [ring.util.response :as response]
             [gccg.backend.api.games]))
 
@@ -52,7 +52,7 @@
               ["api/" (reduce conj
                               gccg.backend.api.games/routes
                               [[["ping"] identity]])]
-              [true #(response/not-found "Not Found")]]])
+              [true (constantly (response/not-found "Not Found"))]]])
 
 (def app
   (wrap-middleware (make-handler routes)))

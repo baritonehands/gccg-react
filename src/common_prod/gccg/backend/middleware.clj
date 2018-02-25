@@ -6,6 +6,7 @@
 
 (defn wrap-middleware [handler]
   (-> handler
+      wrap-with-logger
       (wrap-resource "public")
       wrap-params
       wrap-gzip))
