@@ -87,7 +87,7 @@ It will take awhile to download and unpack all those images.
 ### Setup Links
 
 Each platform has a separate folder, so you'll need to link them all to
-you local gccg-core directory.
+your local gccg-core directory.
 
 ```
 # Web
