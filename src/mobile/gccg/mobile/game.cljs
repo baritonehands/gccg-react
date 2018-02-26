@@ -13,7 +13,7 @@
 (def touchable-highlight (r/adapt-react-class (.-TouchableHighlight ReactNative)))
 
 (defn game [props]
-  (let [game (subscribe [:game])
+  (let [game-sub (subscribe [:game/info])
         render-cardset (fn [data]
                          (r/as-element
                            [touchable-highlight {:on-press (fn []
@@ -25,9 +25,8 @@
                                            :border-bottom-width 1}}
                              [text {:key (.-index data)} (-> data .-item .-source)]]]))]
     (fn [props]
-      (println "Game props" props)
       [view {:style {:flex-direction "column"
                      :align-items "center"}}
-       [flat-list {:data        (->> @game :meta :cardset clj->js)
+       [flat-list {:data        (->> @game-sub :cardset clj->js)
                    :render-item render-cardset
                    :style {:width "100%"}}]])))

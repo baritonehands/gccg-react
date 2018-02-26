@@ -20,14 +20,11 @@
         page (r/atom 0)
         update-page (fn [n]
                       (let [new-page (swap! page + n)]
-                        (println "Updating page" new-page)
                         (if (>= new-page 0)
                           (.setPage @nav new-page)
                           (.exitApp back-handler))
                         true))
-        handler (fn []
-                  (println (js-keys @nav))
-                  (update-page -1))]
+        handler #(update-page -1)]
     (r/create-class
       {:component-did-mount    #(.addEventListener back-handler "hardwareBackPress" handler)
        :component-will-unmount #(.removeEventListener back-handler "hardwareBackPress" handler)

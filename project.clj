@@ -28,11 +28,11 @@
             [lein-doo "0.1.8"]]
 
   :aliases {"prod-build"    ^{:doc "Recompile code with prod profile."}
-                            ["do" "clean" ["prod-electron"] ["prod-mobile"]]
+                            ["do" "clean" ["uberjar"] ["prod-electron"] ["prod-mobile"]]
             "prod-electron" ^{:doc "Compile electron with prod profile."}
                             ["do"
                              ["with-profile" "prod" "cljsbuild" "once" "electron-main"]
-                             ["with-profile" "prod" "cljsbuild" "once" "electron-renderer"]]
+                             ["with-profile" "prod" "cljsbuild" "once" "electron-ui"]]
             "prod-mobile"   ^{:doc "Compile mobile with prod profile."}
                             ["do"
                              ["with-profile" "prod" "cljsbuild" "once" "ios"]
@@ -61,6 +61,7 @@
                        :source-paths ["src/common_dev"]
                        ;:prep-tasks   ["compile" ["cljsbuild" "once" "web"]]
                        :figwheel     {:css-dirs        ["electron_app/css" "resources/public/css"]
+                                      :nrepl-port 7888
                                       :ring-handler    gccg.backend.handler/app
                                       :load-all-builds false}
                        :cljsbuild    {:builds [{:source-paths ["src/electron_main"]
@@ -70,13 +71,13 @@
                                                                :optimizations  :simple
                                                                :pretty-print   true
                                                                :cache-analysis true}}
-                                               {:source-paths ["src/electron_renderer" "src/desktop_dev" "src/desktop"]
-                                                :id           "electron-renderer"
+                                               {:source-paths ["src/electron_ui" "src/desktop_dev" "src/desktop" "src/common"]
+                                                :id           "electron-ui"
                                                 :figwheel     true
-                                                :compiler     {:output-to      "electron_app/gen/js/electron-renderer.js"
-                                                               :output-dir     "electron_app/gen/js/electron-renderer"
+                                                :compiler     {:output-to      "electron_app/gen/js/electron-ui.js"
+                                                               :output-dir     "electron_app/gen/js/electron-ui"
                                                                :source-map     true
-                                                               :asset-path     "gen/js/electron-renderer"
+                                                               :asset-path     "gen/js/electron-ui"
                                                                :optimizations  :none
                                                                :cache-analysis true
                                                                :main           dev.core}}
@@ -91,18 +92,18 @@
                                                                :cache-analysis true
                                                                :main           dev.core}}
                                                {:id           "ios"
-                                                :source-paths ["src/ios" "src/ios_dev" "src/mobile" "src/mobile_dev"]
+                                                :source-paths ["src/ios" "src/ios_dev" "src/mobile" "src/mobile_dev" "src/common"]
                                                 :figwheel     true
-                                                :compiler     {:output-to     "target/cljsbuild/ios/not-used.js"
+                                                :compiler     {:output-to     "target/ios/not-used.js"
                                                                :main          env.ios.main
-                                                               :output-dir    "target/cljsbuild/ios"
+                                                               :output-dir    "target/ios"
                                                                :optimizations :none}}
                                                {:id           "android"
-                                                :source-paths ["src/android" "src/android_dev" "src/mobile" "src/mobile_dev"]
+                                                :source-paths ["src/android" "src/android_dev" "src/mobile" "src/mobile_dev" "src/common"]
                                                 :figwheel     true
-                                                :compiler     {:output-to     "target/cljsbuild/android/not-used.js"
+                                                :compiler     {:output-to     "target/android/not-used.js"
                                                                :main          env.android.main
-                                                               :output-dir    "target/cljsbuild/android"
+                                                               :output-dir    "target/android"
                                                                :optimizations :none}}
                                                ;{:source-paths ["test" "src/desktop"]
                                                ; :id           "test"
@@ -120,19 +121,19 @@
                        :cljsbuild    {:builds [{:source-paths ["src/electron_main"]
                                                 :id           "electron-main"
                                                 :compiler     {:output-to     "electron_app/gen/js/main.js"
-                                                               :output-dir    "target/cljsbuild/electron-release"
+                                                               :output-dir    "target/cljsbuild/electron-main"
                                                                :optimizations :advanced
                                                                :static-fns    true
                                                                :infer-externs true}}
-                                               {:source-paths ["src/electron_renderer" "src/desktop" "src/desktop_prod"]
-                                                :id           "electron-renderer"
-                                                :compiler     {:output-to     "electron_app/gen/js/electron-renderer.js"
-                                                               :output-dir    "target/cljsbuild/electron-renderer"
+                                               {:source-paths ["src/electron_ui" "src/desktop" "src/desktop_prod"]
+                                                :id           "electron-ui"
+                                                :compiler     {:output-to     "electron_app/gen/js/electron-ui.js"
+                                                               :output-dir    "target/cljsbuild/electron-ui"
                                                                :optimizations :advanced
                                                                :static-fns    true
                                                                :infer-externs true
                                                                :main          prod.core}}
-                                               {:source-paths ["src/web" "src/desktop" "src/desktop_prod"]
+                                               {:source-paths ["src/web" "src/desktop" "src/desktop_prod" "src/common"]
                                                 :id           "web"
                                                 :compiler     {:output-to     "target/cljsbuild/public/js/web.js"
                                                                :output-dir    "target/uberjar"
@@ -140,20 +141,20 @@
                                                                :static-fns    true
                                                                :infer-externs true
                                                                :main          prod.core}}
-                                               {:source-paths ["src/ios" "src/ios_prod" "src/mobile"]
+                                               {:source-paths ["src/ios" "src/ios_prod" "src/mobile" "src/common"]
                                                 :id           "ios"
                                                 :compiler     {:output-to          "index.ios.js"
                                                                :main               env.ios.main
-                                                               :output-dir         "target/cljsbuild/ios"
+                                                               :output-dir         "target/ios"
                                                                :static-fns         true
                                                                :optimize-constants true
                                                                :optimizations      :simple
                                                                :closure-defines    {"goog.DEBUG" false}}}
-                                               {:source-paths ["src/android" "src/android_prod" "src/mobile"]
+                                               {:source-paths ["src/android" "src/android_prod" "src/mobile" "src/common"]
                                                 :id           "android"
                                                 :compiler     {:output-to          "index.android.js"
                                                                :main               env.android.main
-                                                               :output-dir         "target/cljsbuild/android"
+                                                               :output-dir         "target/android"
                                                                :static-fns         true
                                                                :optimize-constants true
                                                                :optimizations      :simple

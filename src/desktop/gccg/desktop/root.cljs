@@ -4,19 +4,20 @@
             [gccg.desktop.card-details :refer [card-details]]))
 
 (defn root []
-  (let [game (subscribe [:game])]
+  (let [game-sub (subscribe [:game/info])
+        cardset-sub (subscribe [:game/cardset])]
     (fn []
       [:div.root
        [:div {:style {"width" "30%"}}
         (into [list-view {:item-click #(dispatch [:game/select-set %])}]
-              (for [{:keys [source]} (->> @game :meta :cardset)]
+              (for [{:keys [source]} (->> @game-sub :cardset)]
                 source))]
-       [:div {:style {"width" "70%"}}                       ;(-> game :selected-set str)
-        (if-let [cardset (-> @game :selected-set)]
+       [:div {:style {"width" "70%"}}
+        (if-let [cardset @cardset-sub]
           (into [list-view {}]
                 (for [card (->> cardset :cards first :card (sort-by :name))]
                   [card-details {:key     (:name card)
-                                 :game    (-> @game :meta)
+                                 :game    @game-sub
                                  :cardset cardset
                                  :card    card}])
                 ))]])))

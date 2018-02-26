@@ -12,7 +12,6 @@
 (reg-event-fx
   :images/add-to-cache
   (fn [cofx [_ file]]
-    (println "Adding to cache" file)
     {:file.fx/open {:filename      file
                     :type          :image
                     :options       {:encoding "base64"}
@@ -33,5 +32,4 @@
 (reg-event-db
   :images/remove-from-cache
   (fn [db [_ file]]
-    (println "Removing from cache" file)
     (update db :images dissoc file)))

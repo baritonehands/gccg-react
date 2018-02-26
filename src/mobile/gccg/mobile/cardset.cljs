@@ -27,21 +27,22 @@
            v)) xs))
 
 (defn cardset [props]
-  (let [game (subscribe [:game])]
+  (let [game-sub (subscribe [:game/info])
+        cardset-sub (subscribe [:game/cardset])]
     (fn [props]
-      (if-let [cardset (-> @game :selected-set)]
+      (if-let [cardset @cardset-sub]
         (let [render-card (fn [data]
-                            (let [game (-> @game :meta)
+                            (let [game @game-sub
                                   card (.-item data)
                                   {:keys [name attr]} card
                                   token-fn (token->img (:image game))]
                               (r/as-element
                                 [view {:key   name
-                                       :style {:flex-direction     "row"
+                                       :style {:flex-direction      "row"
                                                :border-bottom-width 1
                                                :border-bottom-color "#333333"
-                                               :padding-horizontal 10
-                                               :padding-vertical     10}}
+                                               :padding-horizontal  10
+                                               :padding-vertical    10}}
                                  [cached-image {:file     (str "graphics/" (:dir game) "/" (:dir cardset) "/" (:graphics card))
                                                 :alt-text name
                                                 :style    {:flex   0
@@ -72,7 +73,6 @@
                                   [text {:style {:font-weight "bold"}} (card/stats attr)]]])))
               update-viewable-image (fn [info]
                                       (let [changed (-> info .-changed (js->clj :keywordize-keys true))]
-                                        (println "Changed items" changed)
                                         (doseq [row changed]
                                           (dispatch [(if (:isViewable row)
                                                        :images/add-to-cache

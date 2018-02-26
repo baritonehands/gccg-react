@@ -1,6 +1,5 @@
 (ns gccg.backend.server
   (:require [gccg.backend.handler :refer [app]]
-            ;[config.core :refer [env]]
             [ring.adapter.jetty :refer [run-jetty]])
   (:gen-class)
   (:import (org.slf4j LoggerFactory)

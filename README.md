@@ -35,9 +35,9 @@ every platform.
 ## Shared Code Breakdown
 
 * All platforms: 181 lines
-* Web/Desktop: 139 lines
-* Mobile: 213 lines
-* Backend: 142 lines
+* Web/Desktop: 140 lines
+* Mobile: 214 lines
+* Backend: 79 lines
 * Platform specific: 311 lines
 
 ## Current and Planned Functionality
@@ -47,7 +47,7 @@ Magic: The Gathering cards.
 
 I plan to add these features most likely in this order:
 
-* Deck builder
+* Search and build decks
 * Responsive layout for different screen sizes
 * Script parser (GCCG has its own scripting language)
 * Play GCCG against a real opponent on a real server
@@ -57,9 +57,12 @@ I plan to add these features most likely in this order:
 
 Each target requires different instructions. Start by cloning this repo.
 
+    git clone https://github.com/baritonehands/gccg-react.git
+    cd gccg-react
+
 ### Install GCCG
 
-I refer to GCCG locally by using the gccg_package tool.
+I refer to GCCG locally and update using gccg-core.
 
 ```
 curl -O http://gccg.sourceforge.net/modules/gccg-core-1.0.10.tgz
@@ -75,6 +78,8 @@ cd gccg-core
 ./gccg_package update
 
 ./gccg_package install mtg mtg-cards*
+
+cd ..
 ```
 
 It will take awhile to download and unpack all those images.
@@ -120,16 +125,19 @@ Then open your browser to [http://localhost:3449](http://localhost:3449).
 
 Read the instructions for [cljs-electron](https://github.com/Gonzih/cljs-electron) for installation, except it's nested in electron_app.
 
-From the console:
+One time, build the main .js file:
 
     lein cljsbuild once electron-main
-    lein figwheel electron-renderer
+
+From the console:
+    
+    lein figwheel electron-ui
 
 From the REPL:
 
     lein repl
     
-    (start-figwheel "electron-renderer")
+    (start-figwheel "electron-ui")
 
 Then run electron in another terminal:
     
@@ -138,7 +146,7 @@ Then run electron in another terminal:
     
 ### iOS/Android
 
-Read the instructions in the [re-natal](https://github.com/drapanjanas/re-natal) for installation.
+Read the instructions in the [re-natal](https://github.com/drapanjanas/re-natal) repository for installation.
 
 Setup your device calling `re-natal` before you can run figwheel.
 
@@ -162,8 +170,12 @@ Then run react-native cli in another terminal:
     
     # OR
     
-    react-native run android
+    react-native run-android
 
 ## Releasing
 
-Read the links for each original project above for distribution instructions.
+The prod builds have an alias in project.clj:
+
+    lein prod-build
+
+Read the links for each original project above for packaging instructions.

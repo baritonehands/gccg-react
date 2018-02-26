@@ -2,6 +2,11 @@
   (:require [re-frame.core :refer [reg-sub]]))
 
 (reg-sub
-  :game
+  :game/info
   (fn [db _]
-    (:game db)))
+    (-> db :game :meta)))
+
+(reg-sub
+  :game/cardset
+  (fn [db _]
+    (-> db :game :selected-set)))

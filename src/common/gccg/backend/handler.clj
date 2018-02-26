@@ -5,22 +5,8 @@
             [ring.util.response :as response]
             [gccg.backend.api.games]))
 
-;(def version
-;  (json/read-str (slurp (io/resource "version.json"))))
-
 (def mount-target
-  [:div#app-container
-   ;[:div.init
-   ; [:div {:style {:textAlign "center"}}
-   ;  [:div.s-loader-container.s-loader-bg-ghost
-   ;   [:span.s-loader
-   ;    [:div.s-loader-ring-primary]]]]]
-   ])
-
-;(defn prodify [s]
-;  (if (env :dev)
-;    s
-;    (str s "?v=" (get version "version"))))
+  [:div#app-container])
 
 (defn head []
   [:head
@@ -38,20 +24,13 @@
      mount-target
      (include-js "/js/web.js")]))
 
-;(def cards-page
-;  (html5
-;    (head)
-;    [:body
-;     mount-target
-;     (include-js "/js/app_devcards.js")]))
-
 (def routes ["/"
              [["" (-> (response/response spa-page)
                       (response/content-type "text/html")
                       constantly)]
-              ["api/" (reduce conj
-                              gccg.backend.api.games/routes
-                              [[["ping"] identity]])]
+              ["api/" (vec (concat
+                             gccg.backend.api.games/routes
+                             [[["ping"] identity]]))]
               [true (constantly (response/not-found "Not Found"))]]])
 
 (def app

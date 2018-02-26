@@ -8,6 +8,7 @@
   (-> (io/resource filename)
       slurp))
 
+; Liberator is overkill for this, but I wanted to try it bidi
 (defresource games-resource
              :available-media-types ["application/xml"]
              :allowed-methods [:get]
