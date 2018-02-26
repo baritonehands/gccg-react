@@ -151,6 +151,8 @@ Read the instructions in the [re-natal](https://github.com/drapanjanas/re-natal)
 Setup your device calling `re-natal` before you can run figwheel.
 
 From the console:
+
+    re-natal use-figwheel
     
     lein figwheel ios
     

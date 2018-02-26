@@ -8,16 +8,16 @@
         cardset-sub (subscribe [:game/cardset])]
     (fn []
       [:div.root
-       [:div {:style {"width" "30%"}}
+       [:div {:style {:width "30%"
+                      :border-right "1px solid #333333 "}}
         (into [list-view {:item-click #(dispatch [:game/select-set %])}]
               (for [{:keys [source]} (->> @game-sub :cardset)]
                 source))]
-       [:div {:style {"width" "70%"}}
+       [:div {:style {:width "70%"}}
         (if-let [cardset @cardset-sub]
           (into [list-view {}]
                 (for [card (->> cardset :cards first :card (sort-by :name))]
                   [card-details {:key     (:name card)
                                  :game    @game-sub
                                  :cardset cardset
-                                 :card    card}])
-                ))]])))
+                                 :card    card}])))]])))
