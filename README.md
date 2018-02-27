@@ -118,6 +118,10 @@ ln -s ../../../../gccg-core/graphics android/app/src/main/assets/graphics
 # iOS is already linked in the xcode project
 ```
 
+### Install deps
+
+    yarn install
+
 ### Web App
 
 Running this is similar to a standard Figwheel app.
