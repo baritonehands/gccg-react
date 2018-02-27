@@ -18,17 +18,22 @@ I combined this repo from a bunch of different sources.
 
 ## Rationale
 
-Learning programming hasn't changed very much in a long time. We're still teaching
-new programmers to write console only programs using tools that are very disconnected
-from the actual running program. Also, any apps written are difficult to publish
-for other platforms or for sharing with anyone who isn't also a programmer.
+I chose GCCG because it is an app I used to use whose user base seems to have eroded.
+I wanted to create a more modern version that supports more platforms, namely mobile
+and web. Also, the UI was not very user friendly, and I thought I could improve upon
+that. I hope if I can finish it then it would find more users again.
 
-If anyone asked me what to learn programming-wise in 2018, I would recommend React. As 
+More broadly, learning programming hasn't changed very much in a long time. We're still
+teaching new programmers to write console only programs using tools that are very
+disconnected from the actual running program. Also, any apps written are difficult to
+publish for other platforms or for sharing with anyone who isn't also a programmer.
+
+If anyone asked me what to learn programming-wise in 2018, I would recommend React. As
 an added bonus, REPL driven development in Clojure(Script) brings the developer
 as tight a feedback loop and powerful tooling as can be found anywhere.
 
 There are many languages/frameworks that get close to true cross-platform
-development, but the combo of ClojureScript + React is my preferred choice. This 
+development, but the combo of ClojureScript + React is my preferred choice. This
 project is my attempt at showing how easy and productive it can be to target
 every platform.
 
@@ -84,6 +89,10 @@ cd ..
 
 It will take awhile to download and unpack all those images.
 
+If Mtg is too heavyweight for you, you could instead install poker and
+modify [common/events.cljs](src/common/gccg/common/events.cljs) with
+```:name "poker"```.
+
 ### Setup Links
 
 Each platform has a separate folder, so you'll need to link them all to
@@ -116,7 +125,7 @@ From the console:
 From the REPL:
 
     lein repl
-    
+
     (start-figwheel "web")
 
 Then open your browser to [http://localhost:3449](http://localhost:3449).
@@ -130,20 +139,20 @@ One time, build the main .js file:
     lein cljsbuild once electron-main
 
 From the console:
-    
+
     lein figwheel electron-ui
 
 From the REPL:
 
     lein repl
-    
+
     (start-figwheel "electron-ui")
 
 Then run electron in another terminal:
-    
+
     cd electron_app
     electron .
-    
+
 ### iOS/Android
 
 Read the instructions in the [re-natal](https://github.com/drapanjanas/re-natal) repository for installation.
@@ -153,25 +162,25 @@ Setup your device calling `re-natal` before you can run figwheel.
 From the console:
 
     re-natal use-figwheel
-    
+
     lein figwheel ios
-    
+
     # OR
-    
+
     lein figwheel android
 
 From the REPL:
 
     lein repl
-    
+
     (start-figwheel "ios") ; or "android"
 
 Then run react-native cli in another terminal:
-    
+
     react-native run-ios
-    
+
     # OR
-    
+
     react-native run-android
 
 ## Releasing
