@@ -7,6 +7,8 @@ codebase. React wrapper is reagent/re-frame.
 games (such as Magic: The Gathering, Lord of the Rings, etc.) written in C++
 with SDL as the graphics engine.
 
+![GCCG Screen Capture](docs/GCCGScreenCap.gif)
+
 ## Original Sources
 
 I combined this repo from a bunch of different sources.
