@@ -58,6 +58,10 @@ I plan to add these features most likely in this order:
 * Play GCCG against a real opponent on a real server
 * Add proxy/reimplement server in Clojure (for new features)
 
+## Implementation Notes
+
+Check out [my notes](doc/notes.md) on some interesting things I found during implementation.
+
 ## Running it
 
 Each target requires different instructions. Start by cloning this repo.
