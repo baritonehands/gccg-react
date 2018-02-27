@@ -60,7 +60,7 @@ I plan to add these features most likely in this order:
 
 ## Implementation Notes
 
-Check out [my notes](doc/notes.md) on some interesting things I found during implementation.
+Check out [my notes](docs/notes.md) on some interesting things I found during implementation.
 
 ## Running it
 
